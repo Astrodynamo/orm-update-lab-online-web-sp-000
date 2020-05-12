@@ -29,6 +29,15 @@ class Student
     DB[:conn].execute(sql)
   end
   
+  def update
+    sql = <<-SQL
+      UPDATE students
+      SET name=?, grade=? 
+    SQL
+    
+    DB[:conn].execute(sql)
+  end
+  
   def save
     if self.id
       self.update
