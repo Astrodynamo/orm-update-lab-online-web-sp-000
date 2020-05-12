@@ -58,5 +58,19 @@ class Student
     student.save
     student
   end
+  
+  def self.new_from_db (students)
+    self.new(students[0], students[1], students[2])
+  end
+  
+  def self.find_by_name (name)
+    sql = <<-SQL
+      SELECT * FROM students 
+      WHERE name = ?
+    SQL
+    
+    student = DB[:comm].execute(sql, name)[0]
+    self.new_from_db(student)
+  end
 
 end
